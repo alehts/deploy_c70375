@@ -12,8 +12,8 @@ import sessionsRouter from './routes/sessions.router.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-// const connection = mongoose.connect(process.env.MONGO_URL)
-const connection = mongoose.connect("mongodb+srv://admin:admin@cluster0.8hkzesl.mongodb.net/clase45-adoptme-deploy?retryWrites=true&w=majority")
+const connection = mongoose.connect(process.env.MONGO_URL)
+// const connection = mongoose.connect("mongodb+srv://admin:admin@cluster0.8hkzesl.mongodb.net/clase45-adoptme-deploy?retryWrites=true&w=majority")
 
 
 const swaggerOptions = {
