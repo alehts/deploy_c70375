@@ -1,6 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUIExpress from 'swagger-ui-express'
+
 
 import usersRouter from './routes/users.router.js';
 import petsRouter from './routes/pets.router.js';
@@ -9,8 +12,24 @@ import sessionsRouter from './routes/sessions.router.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-const connection = mongoose.connect(process.env.MONGO_URL)
-// const connection = mongoose.connect("mongodb+srv://admin:admin@cluster0.8hkzesl.mongodb.net/clase45-adoptme-deploy?retryWrites=true&w=majority")
+// const connection = mongoose.connect(process.env.MONGO_URL)
+const connection = mongoose.connect("mongodb+srv://admin:admin@cluster0.8hkzesl.mongodb.net/clase45-adoptme-deploy?retryWrites=true&w=majority")
+
+
+const swaggerOptions = {
+    definition: {
+        openapi: "3.0.1",
+        info: {
+            title: "Documentacion API Adoptme",
+            description: "Documentacion para uso de swagger"
+        }
+    },
+    apis: [`./src/docs/**/*.yaml`]
+};
+const specs = swaggerJSDoc(swaggerOptions);
+//Declare swagger api endpoint 
+app.use('/apidocs', swaggerUIExpress.serve, swaggerUIExpress.setup(specs));
+
 
 app.use(express.json());
 app.use(cookieParser());
